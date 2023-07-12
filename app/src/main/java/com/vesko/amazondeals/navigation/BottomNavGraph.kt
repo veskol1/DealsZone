@@ -1,4 +1,4 @@
-package com.vesko.amazondeals.components
+package com.vesko.amazondeals.navigation
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
@@ -9,7 +9,7 @@ import com.vesko.amazondeals.screens.CategoryScreen
 import com.vesko.amazondeals.screens.DealScreen
 import com.vesko.amazondeals.screens.DealsScreen
 import com.vesko.amazondeals.screens.SettingsScreen
-import com.vesko.amazondeals.utils.BottomBarScreen
+import com.vesko.amazondeals.screens.FavoritesScreen
 import com.vesko.amazondeals.viewmodel.DealsViewModel
 
 @Composable
@@ -34,6 +34,10 @@ fun BottomNavGraph(
 
         composable(BottomBarScreen.Category.route) {
             CategoryScreen()
+        }
+
+        composable(BottomBarScreen.Favorites.route)  {
+            FavoritesScreen()
         }
 
         composable(BottomBarScreen.Settings.route)  {

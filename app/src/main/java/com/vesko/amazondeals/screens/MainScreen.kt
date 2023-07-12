@@ -2,6 +2,8 @@ package com.vesko.amazondeals.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -20,8 +22,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.vesko.amazondeals.components.BottomNavGraph
-import com.vesko.amazondeals.utils.BottomBarScreen
+import com.vesko.amazondeals.navigation.BottomNavGraph
+import com.vesko.amazondeals.navigation.BottomBarScreen
 import com.vesko.amazondeals.viewmodel.DealsViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -52,9 +54,9 @@ fun MainScreen(dealsViewModel: DealsViewModel = viewModel()) {
 
 @Composable
 fun BottomNavigation (navController: NavController) {
-    val items = listOf(BottomBarScreen.Deals, BottomBarScreen.Category, BottomBarScreen.Settings)
+    val screens = listOf(BottomBarScreen.Deals, BottomBarScreen.Category, BottomBarScreen.Favorites, BottomBarScreen.Settings)
     NavigationBar {
-        items.forEach { screen ->
+        screens.forEach { screen ->
             Item(item = screen, navController = navController)
         }
     }
@@ -64,15 +66,18 @@ fun BottomNavigation (navController: NavController) {
 fun RowScope.Item(item: BottomBarScreen, navController: NavController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
+    val selected = currentDestination?.route == item.route
     NavigationBarItem(
-        icon = { Icon( ImageVector.vectorResource(id = item.icon), contentDescription = null) },
+        icon = {
+            Icon(ImageVector.vectorResource(id = item.selectedIcon.takeIf { selected }
+                ?: item.icon), contentDescription = null)
+        },
         label = { Text(item.name) },
-        selected = currentDestination?.route == item.route,
+        selected = selected,
+        enabled = true.takeIf { item != BottomBarScreen.Settings } ?: false,
         onClick = {
             navController.navigate(item.route) {
-                popUpTo(BottomBarScreen.Deals.route) {
-                    saveState = true
-                }
+                popUpTo(BottomBarScreen.Deals.route) { saveState = true }
                 launchSingleTop = true
                 restoreState = true
             }
