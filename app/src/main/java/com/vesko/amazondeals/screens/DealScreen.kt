@@ -58,7 +58,7 @@ fun DealScreen(id: String, onBackClicked: () -> Unit) {
 
 
     Scaffold(
-        topBar = { TopBar(deal!!.title.take(20), onBackClicked = onBackClicked) }
+        topBar = { TopBar(dealTitle = deal!!.title.take(20), onBackClicked = onBackClicked) }
     ) {
         BackHandler { // handle back pressed
             onBackClicked()

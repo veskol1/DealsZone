@@ -1,5 +1,6 @@
 package com.vesko.amazondeals.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vesko.amazondeals.model.Deal
@@ -15,14 +16,12 @@ import javax.inject.Inject
 @HiltViewModel
 class DealsViewModel @Inject constructor(private val repo: DealsRepository) : ViewModel() {
 
-    private val _searchBarText = MutableStateFlow("")
-    val searchBarText = _searchBarText.asStateFlow()
-
     private val _uiState = MutableStateFlow(
         UiState(
             status = Status.LOADING,
             list = arrayListOf(),
-            filteredList = arrayListOf()
+            filteredList = arrayListOf(),
+            searchBarText = ""
         )
     )
 
@@ -44,7 +43,7 @@ class DealsViewModel @Inject constructor(private val repo: DealsRepository) : Vi
                     state.copy(
                         status = Status.DONE,
                         list = data,
-                        filteredList = data
+                        filteredList = arrayListOf()
                     )
                 }
             }
@@ -52,20 +51,32 @@ class DealsViewModel @Inject constructor(private val repo: DealsRepository) : Vi
     }
 
     fun onSearchDeal(searchText: String) {
-        val filteredLista = uiState.value.list.filter {
-            it.title.contains(searchText)
-        }
-        _uiState.update { state ->
-            state.copy(
-                filteredList = filteredLista as ArrayList<Deal>
-            )
+        Log.d("haha","onSearchDeal")
+        if (searchText.isEmpty()) {
+            _uiState.update { state ->
+                state.copy(
+                    filteredList = arrayListOf(),
+                    searchBarText = searchText
+                )
+            }
+        } else {
+            val filteredNewList = uiState.value.list.filter {
+                it.title.contains(searchText, ignoreCase = true)
+            }
+            _uiState.update { state ->
+                state.copy(
+                    filteredList = filteredNewList as ArrayList<Deal>,
+                    searchBarText = searchText
+                )
+            }
         }
     }
 
     data class UiState(
         val status: Status,
         val list: ArrayList<Deal>,
-        val filteredList: ArrayList<Deal>
+        val filteredList: ArrayList<Deal>,
+        val searchBarText: String
     )
 
 
