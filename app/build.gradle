@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.amazondeals'
+    namespace 'com.vesko.deals_zone'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.amazondeals"
+        applicationId "com.vesko.deals_zone"
         minSdk 26
         targetSdk 33
         versionCode 1
@@ -79,4 +79,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
+
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 }
