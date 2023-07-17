@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.vesko.deals_zone.screens.CategoriesScreen
 import com.vesko.deals_zone.screens.CategoryScreen
 import com.vesko.deals_zone.screens.DealScreen
 import com.vesko.deals_zone.screens.DealsScreen
@@ -23,32 +24,60 @@ fun BottomNavGraph(
         navController,
         startDestination = BottomBarScreen.Deals.route
     ) {
-        composable(BottomBarScreen.Deals.route) {
+        composable(route = BottomBarScreen.Deals.route) {
             DealsScreen(
-                navController = navController,
+                navigateOnCardClick = { dealId ->
+                    navController.navigate("deal/$dealId/true")
+                },
                 bottomBarVisible = bottomBarVisible,
                 dealsViewModel = dealsViewModel,
                 snackbarHostState = snackbarHostState
             )
         }
 
-        composable(BottomBarScreen.Category.route) {
-            CategoryScreen()
+        composable(route = BottomBarScreen.Category.route) {
+            CategoriesScreen(bottomBarVisible = bottomBarVisible,onCategorySelected = { category ->
+                dealsViewModel.updateCategoryDeals(category = category.name)
+                navController.navigate("category/$category")
+            })
         }
 
-        composable(BottomBarScreen.Favorites.route)  {
+        composable(route = BottomBarScreen.Favorites.route)  {
             FavoritesScreen()
         }
 
-        composable(BottomBarScreen.Settings.route)  {
+        composable(route = BottomBarScreen.Settings.route)  {
             SettingsScreen()
         }
 
-        composable("deal/{id}") {
-            DealScreen(id = it.arguments?.getString("id") ?: "", onBackClicked = {
-                navController.popBackStack()
-                bottomBarVisible(true)
-            })
+        composable(
+            route = "deal/{id}/{showBottomBar}"
+        ) {
+            val dealId = it.arguments?.getString("id") ?: ""
+            val showBottomBar = it.arguments?.getString("showBottomBar") ?: ""
+            DealScreen(
+                deal = dealsViewModel.findDeal(dealId),
+                onBackClicked = {
+                    navController.popBackStack()
+                    bottomBarVisible(showBottomBar == "true")
+                })
+        }
+
+        composable(route = "category/{categoryName}") {
+            val categoryName =  it.arguments?.getString("categoryName") ?: ""
+            CategoryScreen(
+                categoryName = categoryName,
+                navigateOnCardClick = { dealId ->
+                    navController.navigate("deal/$dealId/false")
+                },
+                bottomBarVisible = bottomBarVisible,
+                dealsViewModel = dealsViewModel,
+                snackbarHostState = snackbarHostState,
+                onBackClicked = {
+                    navController.popBackStack()
+                    bottomBarVisible(true)
+                }
+            )
         }
     }
 }

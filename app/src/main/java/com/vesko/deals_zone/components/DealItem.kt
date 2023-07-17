@@ -1,6 +1,5 @@
 package com.vesko.deals_zone.components
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -57,7 +56,7 @@ fun DealItem(
             .height(120.dp.takeIf { !searchViewItemList } ?: 100.dp)
             .clickable {
                 bottomBarVisible(false)
-                navigateOnCardClick( "deal/${deal.id}")
+                navigateOnCardClick(deal.id)
             }
             .then(
                 if (searchViewItemList) {
@@ -129,7 +128,6 @@ fun DealItem(
                             )
                     }
                     if (!searchViewItemList) {
-                        Log.d("haha", "not search view")
                         Column(
                             modifier = Modifier
                                 .fillMaxHeight()

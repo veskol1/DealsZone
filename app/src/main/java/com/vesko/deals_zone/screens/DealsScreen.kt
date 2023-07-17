@@ -17,16 +17,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.vesko.deals_zone.components.DealItem
 import com.vesko.deals_zone.components.SearchViewBar
+import com.vesko.deals_zone.model.Deal
 import com.vesko.deals_zone.viewmodel.DealsViewModel
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun DealsScreen(
-    navController: NavController,
+    navigateOnCardClick: (String) -> Unit,
     bottomBarVisible: (Boolean) -> Unit,
     dealsViewModel: DealsViewModel,
     snackbarHostState: SnackbarHostState
@@ -36,17 +36,20 @@ fun DealsScreen(
     val scope = rememberCoroutineScope()
 
     Column(modifier = Modifier.fillMaxSize()) {
-        SearchViewBar(dealsViewModel, navigateOnCardClick = { route ->
-            navController.navigate(route)
+        SearchViewBar(dealsViewModel = dealsViewModel, navigateOnCardClick = { dealId ->
+            navigateOnCardClick(dealId)
         })
         Spacer(modifier = Modifier.height(8.dp))
         when (dealUiState.status) {
-            DealsViewModel.Status.LOADING ->  LoadingScreen()
+            DealsViewModel.Status.LOADING -> LoadingScreen()
             DealsViewModel.Status.ERROR -> ErrorScreen()
             else -> {
                 ShowLazyColumn(
-                    dealUiState = dealUiState,
-                    navController = navController,
+                    dealList = dealUiState.list,
+                    dealFavoriteList = dealUiState.favoriteSavedDeals,
+                    navigateOnCardClick = { dealId ->
+                        navigateOnCardClick(dealId)
+                    },
                     bottomBarVisible = bottomBarVisible,
                     snackbarHostState = snackbarHostState,
                     onClickFavoriteItem = {dealId ->
@@ -63,28 +66,30 @@ fun DealsScreen(
 
 @Composable
 fun ShowLazyColumn(
-    dealUiState: DealsViewModel.UiState,
-    navController: NavController,
+    dealList: ArrayList<Deal>,
+    dealFavoriteList: ArrayList<Deal>,
+    navigateOnCardClick: (String) -> Unit,
     bottomBarVisible: (Boolean) -> Unit,
     snackbarHostState: SnackbarHostState,
     onClickFavoriteItem: (String) -> Unit,
+    showWithoutBottomNavBar: Boolean = false
 ) {
     LazyColumn(
         modifier = Modifier.padding(
             top = 0.dp,
             start = 16.dp,
             end = 16.dp,
-            bottom = 80.dp
+            bottom = 0.dp.takeIf { showWithoutBottomNavBar } ?: 80.dp
         )
     ) {
-        items(dealUiState.list.take(20)) { deal ->
+        items(dealList.take(20)) { deal ->
             DealItem(
                 deal = deal,
-                favoriteDeal = dealUiState.favoriteSavedDeals.contains(deal),
+                favoriteDeal = dealFavoriteList.contains(deal),
                 snackbarHostState = snackbarHostState,
                 bottomBarVisible = bottomBarVisible,
-                navigateOnCardClick = { route ->
-                    navController.navigate(route)
+                navigateOnCardClick = { dealId ->
+                    navigateOnCardClick(dealId)
                 },
                 onClickFavoriteItem = { dealId ->
                     onClickFavoriteItem(dealId)
