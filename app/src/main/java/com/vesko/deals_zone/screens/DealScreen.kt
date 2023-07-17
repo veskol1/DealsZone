@@ -16,15 +16,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -42,23 +36,21 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.vesko.deals_zone.components.OutlinedBuyButton
-import com.vesko.deals_zone.utils.dealsList
+import com.vesko.deals_zone.components.TopBar
+import com.vesko.deals_zone.model.Deal
 
 
 @Composable
-fun DealScreen(id: String, onBackClicked: () -> Unit) {
-    val deal = dealsList.find { it.id == id }
+fun DealScreen(deal: Deal, onBackClicked: () -> Unit) {
     val context = LocalContext.current
     var expanded by remember { mutableStateOf(false) }
 
-
     Scaffold(
-        topBar = { TopBar(dealTitle = deal!!.title.take(20), onBackClicked = onBackClicked) }
+        topBar = { TopBar(title = deal.title.take(20), onBackClicked = onBackClicked) }
     ) {
         BackHandler { // handle back pressed
             onBackClicked()
@@ -72,7 +64,7 @@ fun DealScreen(id: String, onBackClicked: () -> Unit) {
         ) {
             AsyncImage(
                 modifier = Modifier.height(300.dp),
-                model = deal!!.imageDeal,
+                model = deal.imageDeal,
                 contentDescription = null,
             )
 
@@ -127,17 +119,4 @@ fun DealScreen(id: String, onBackClicked: () -> Unit) {
             }
         }
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TopBar(dealTitle: String, onBackClicked: () -> Unit) {
-    TopAppBar(
-        title = { Text(text = dealTitle, overflow = TextOverflow.Ellipsis) },
-        navigationIcon = {
-            IconButton(onClick = onBackClicked) {
-                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "back icon")
-            }
-        }
-    )
 }

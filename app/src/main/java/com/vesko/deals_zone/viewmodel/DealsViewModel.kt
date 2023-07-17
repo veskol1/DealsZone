@@ -33,7 +33,8 @@ class DealsViewModel @Inject constructor(@ApplicationContext context: Context, p
             list = arrayListOf(),
             filteredList = arrayListOf(),
             searchBarText = "",
-            favoriteSavedDeals = arrayListOf()
+            favoriteSavedDeals = arrayListOf(),
+            dealsByCategory = arrayListOf()
         )
     )
 
@@ -146,12 +147,25 @@ class DealsViewModel @Inject constructor(@ApplicationContext context: Context, p
         }
     }
 
+    fun findDeal(dealId: String): Deal {
+        return uiState.value.list.find { it.id == dealId }!!
+    }
+
+    fun updateCategoryDeals(category: String) {
+        _uiState.update { state ->
+            state.copy(
+                dealsByCategory = uiState.value.list.filter { it.category == category } as ArrayList
+            )
+        }
+    }
+
     data class UiState(
         val status: Status,
         val list: ArrayList<Deal>,
         val filteredList: ArrayList<Deal>,
         val searchBarText: String,
-        val favoriteSavedDeals: ArrayList<Deal>
+        val favoriteSavedDeals: ArrayList<Deal>,
+        val dealsByCategory: ArrayList<Deal>,
     )
 
 

@@ -117,9 +117,9 @@ fun SearchViewBar(dealsViewModel: DealsViewModel, navigateOnCardClick: (String) 
                         favoriteDeal = false,
                         snackbarHostState = null,
                         bottomBarVisible = {},
-                        navigateOnCardClick = {
+                        navigateOnCardClick = {dealId ->
                             dealsViewModel.onSearchDeal("")
-                            navigateOnCardClick(it)
+                            navigateOnCardClick(dealId)
                         },
                         onClickFavoriteItem = {},
                         searchViewItemList = true,
@@ -129,7 +129,7 @@ fun SearchViewBar(dealsViewModel: DealsViewModel, navigateOnCardClick: (String) 
                         .padding(16.dp)
                         .clickable {
                             dealsViewModel.onSearchDeal("")
-                            navigateOnCardClick("deal/${deal.id}")
+                            navigateOnCardClick(deal.id)
                         }) {
                         Text(text = deal.title, overflow = TextOverflow.Ellipsis, maxLines = 1)
                     }
