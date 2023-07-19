@@ -12,12 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name="com.vesko.deals_zone.app.MyApp"
-        android:theme="@style/Theme.Amazondeals"
+        android:theme="@style/Theme.DealsZone"
         tools:targetApi="31">
         <activity
             android:name="com.vesko.deals_zone.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Amazondeals">
+            android:theme="@style/Theme.DealsZone">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

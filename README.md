@@ -1,3 +1,4 @@
+
 # Deals Zone
 
 <img src="https://github.com/veskol1/DealsZone/assets/13125281/59829de6-fa64-4388-9313-d64a74678978"  width="300" height="600">
@@ -8,3 +9,4 @@
 #
 
 <img src="https://github.com/veskol1/DealsZone/assets/13125281/fde141e9-d560-4681-af48-3ed77aa26581"  width="300" height="600">
+

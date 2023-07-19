@@ -91,7 +91,7 @@ fun DealScreen(deal: Deal, onBackClicked: () -> Unit) {
                             Modifier
                         } else {
                             Modifier
-                                .height(110.dp)
+                                .height(200.dp)
                                 .drawWithContent {
                                     val colors = listOf(Color.Black, Color.Transparent)
                                     drawContent()
