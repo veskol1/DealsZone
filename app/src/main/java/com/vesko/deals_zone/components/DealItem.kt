@@ -136,8 +136,8 @@ fun DealItem(
                             IconButton(onClick = {
                                 scope.launch {
                                     snackbarHostState?.showSnackbar(
-                                        message = "Saved to favorites".takeIf { favoriteDeal }
-                                            ?: "Removed From Favorites",
+                                        message = "Removed From Favorites".takeIf { favoriteDeal }
+                                            ?: "Saved to favorites",
                                         duration = SnackbarDuration.Short
                                     )
                                 }

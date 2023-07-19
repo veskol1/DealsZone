@@ -35,11 +35,12 @@ val dealsList = arrayListOf(
         realPrice = "20.00",
         category = "travel",
         link = "https://www.amazon.com/DELSEY-Paris-Chatelet-Suitcase-Champagne/dp/B01HIATF6Y",
-        description = "• Lightweight and durable 100% polycarbonate shell that is extremely resilient to cracking or breaking; designed with stylish faux leather accents.\n" +
-                "• Four spinner wheels assuring a stable base with multi-directional rolling with zero weight on your hand for easy travel.\n" +
-                "• Recessed 3-dial TSA approved combination lock for security; unique brake system locks two front wheels to prevent bag from rolling away.\n" +
-                "• Deluxe interior featuring removable hanger and laundry and shoe bags; two large lined compartments with web straps to keep items secure and wrinkle free.\n" +
-                "• Recessed \"one-button\" locking handle system for great maneuverability; 21 inch carry on size is perfect for weekend getaways and short business trips.\n",
-        imageDeal = "https://m.media-amazon.com/images/I/91CO2Aln1tL._AC_SL1500_.jpg"
+        description = "• Kids can take Chelsea doll and her two pets on a road trip with the Barbie Chelsea 2-in-1 Camper that transforms into a cool campsite!\n" +
+                "• Open the toy vehicle and set up camp -- flip the roof to create a pool and place the tree and hammock for fun under the sun!\n" +
+                "• Create a dining space with the dashboard and sleep under the stars in the rooftop bedroom -- 14 themed pieces inspire imaginations and storytelling!\n" +
+                "• Chelsea small doll has her puppy and bunny along for the ride; expand the play opportunities with accessories like a campfire, guitar and food for Chelsea and her pets!\n" +
+                "• When it's time to move on, kids can close the camper up and push to roll into the next adventure!\n" +
+                "• With so many pieces and so much fun, the Chelsea 2-in-1 Camper playset makes a great gift for kids 3 years and older, especially those who love exploring the outdoors!",
+        imageDeal = "https://m.media-amazon.com/images/I/71yCpukXfVL._AC_SL1500_.jpg"
     ),
 )

@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import com.vesko.deals_zone.components.LazyColumnList
 import com.vesko.deals_zone.components.TopBar
 import com.vesko.deals_zone.viewmodel.DealsViewModel
 import kotlinx.coroutines.launch
@@ -39,7 +40,7 @@ fun CategoryScreen(
         Column(modifier = Modifier
             .fillMaxSize()
             .padding(it)) {
-            ShowLazyColumn(
+            LazyColumnList(
                 dealList = dealUiState.dealsByCategory  ,
                 dealFavoriteList = dealUiState.favoriteSavedDeals,
                 navigateOnCardClick = { dealId ->

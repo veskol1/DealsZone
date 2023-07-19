@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.vesko.deals_zone.screens.MainScreen
-import com.vesko.deals_zone.ui.theme.AmazondealsTheme
+import com.vesko.deals_zone.ui.theme.DealsZoneTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
 
 
         setContent {
-            AmazondealsTheme {
+            DealsZoneTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    AmazondealsTheme {
+    DealsZoneTheme {
         MainScreen()
     }
 }

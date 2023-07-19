@@ -43,7 +43,14 @@ fun BottomNavGraph(
         }
 
         composable(route = BottomBarScreen.Favorites.route)  {
-            FavoritesScreen()
+            FavoritesScreen(
+                navigateOnCardClick = { dealId ->
+                    navController.navigate("deal/$dealId/true")
+                },
+                bottomBarVisible = bottomBarVisible,
+                dealsViewModel = dealsViewModel,
+                snackbarHostState = snackbarHostState
+            )
         }
 
         composable(route = BottomBarScreen.Settings.route)  {
