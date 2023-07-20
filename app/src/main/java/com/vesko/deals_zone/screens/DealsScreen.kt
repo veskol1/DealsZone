@@ -53,7 +53,8 @@ fun DealsScreen(
                         scope.launch {
                             dealsViewModel.saveToDataStore(context, id = dealId)
                         }
-                    }
+                    },
+                    showAds = true
                 )
             }
         }
