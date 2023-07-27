@@ -80,7 +80,7 @@ fun DealItem(
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(10.dp), horizontalArrangement = Arrangement.Center
+                        .padding(10.dp), horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically
                 ) {
                     AsyncImage(
                         model = deal.imageDeal,
