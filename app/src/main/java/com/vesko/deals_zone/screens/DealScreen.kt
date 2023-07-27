@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -34,18 +33,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
 import coil.compose.AsyncImage
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdSize
-import com.google.android.gms.ads.AdView
-import com.vesko.deals_zone.R
+import com.vesko.deals_zone.BuildConfig
 import com.vesko.deals_zone.components.AdBanner
 import com.vesko.deals_zone.components.OutlinedBuyButton
 import com.vesko.deals_zone.components.TopBar
@@ -149,7 +143,7 @@ fun DealScreen(deal: Deal, onBackClicked: () -> Unit) {
                         }
                 Spacer(modifier = Modifier.weight(1f))
                 Row {
-                    AdBanner(unitId = stringResource(id = R.string.ad_banner_unit_id_deal_item))
+                    AdBanner(unitId = BuildConfig.BANNER_ITEM)
                 }
             }
         }

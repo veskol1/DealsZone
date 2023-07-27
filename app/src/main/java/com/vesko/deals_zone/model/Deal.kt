@@ -1,9 +1,5 @@
 package com.vesko.deals_zone.model
 
-data class Deals(
-    val list: ArrayList<Deal>
-)
-
 data class Deal(
     val id: String,
     val title: String,

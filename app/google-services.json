@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "323527132527",
+    "project_id": "deals-4d8ce",
+    "storage_bucket": "deals-4d8ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:323527132527:android:ac1aa9916d8455f8c2149a",
+        "android_client_info": {
+          "package_name": "com.vesko.deals_zone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "323527132527-arrpcqb02lhu1omankpsh5283k0pfbmp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6RSBVfDsPFawDthM7W-x3jzOh9NqWy7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "323527132527-arrpcqb02lhu1omankpsh5283k0pfbmp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:323527132527:android:0642c4b54ace6a5ec2149a",
+        "android_client_info": {
+          "package_name": "com.vesko.deals_zone.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "323527132527-arrpcqb02lhu1omankpsh5283k0pfbmp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6RSBVfDsPFawDthM7W-x3jzOh9NqWy7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "323527132527-arrpcqb02lhu1omankpsh5283k0pfbmp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
