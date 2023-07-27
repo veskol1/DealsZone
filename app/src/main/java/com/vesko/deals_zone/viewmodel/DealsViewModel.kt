@@ -22,9 +22,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DealsViewModel @Inject constructor(@ApplicationContext context: Context, private val repo: DealsRepository) : ViewModel() {
+class DealsViewModel @Inject constructor(
+    @ApplicationContext context: Context,
+    private val dataStore: DataStore<Preferences>,
+    private val repo: DealsRepository
+) : ViewModel() {
 
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "favorites")
     private val DEALS = stringSetPreferencesKey("deals")
 
     private val _uiState = MutableStateFlow(
@@ -65,7 +68,7 @@ class DealsViewModel @Inject constructor(@ApplicationContext context: Context, p
         }
     }
     suspend fun saveToDataStore(context: Context, id: String) {
-        val dealsPreferences: Preferences = context.dataStore.data.first()
+        val dealsPreferences: Preferences = dataStore.data.first()
         val stringDealsSet = dealsPreferences[DEALS]
 
         val favoriteDealsSet = stringDealsSet?.toMutableSet()
@@ -77,11 +80,11 @@ class DealsViewModel @Inject constructor(@ApplicationContext context: Context, p
                 favoriteDealsSet.add(id)
             }
 
-            context.dataStore.edit { favorites ->
+            dataStore.edit { favorites ->
                 favorites[DEALS] = favoriteDealsSet
             }
         } ?: run{
-            context.dataStore.edit { favorites ->
+            dataStore.edit { favorites ->
                 favorites[DEALS] = setOf(id)
             }
         }
@@ -113,15 +116,17 @@ class DealsViewModel @Inject constructor(@ApplicationContext context: Context, p
         }
     }
     private suspend fun getFavoriteDealsFromDataStore(dealsList: ArrayList<Deal>, context: Context): ArrayList<Deal> {
-        val dealsPreferences: Preferences = context.dataStore.data.first()
+        val dealsPreferences: Preferences = dataStore.data.first()
         val stringDealsSet = dealsPreferences[DEALS]
         val favoriteDealList = arrayListOf<Deal>()
 
-        stringDealsSet?.forEach {
+        stringDealsSet?.forEach { savedDealId ->
             val dealToAdd = dealsList.find { deal ->
-                deal.id == it
+                deal.id == savedDealId
             }
-            favoriteDealList.add(dealToAdd!!)
+            dealToAdd?.let {
+                favoriteDealList.add(dealToAdd)
+            }
         }
         return favoriteDealList
     }
