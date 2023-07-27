@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.vesko.deals_zone.BuildConfig
 import com.vesko.deals_zone.R
 import com.vesko.deals_zone.model.Deal
 
@@ -34,7 +35,7 @@ fun LazyColumnList(
         if (showAds) {
             itemsIndexed(dealList) { index, deal ->
                 if (index.mod(3 ) == 0 && index != 0) {
-                    AdBanner(unitId = stringResource(id = R.string.ad_banner_unit_id_deals_list))
+                    AdBanner(unitId = BuildConfig.BANNER_LIST)
                 } else {
                     DealItem(
                         deal = deal,

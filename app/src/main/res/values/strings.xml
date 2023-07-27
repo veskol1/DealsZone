@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Deals Zone</string>
     <string name="ad_banner_unit_id_deal_item">ca-app-pub-5564222451238710/2695005272</string>
-    <string name="ad_banner_unit_id_deals_list">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ad_banner_unit_id_deals_list">ca-app-pub-5564222451238710/7661989985</string>
+
+    <string name="test_ad_banner">ca-app-pub-3940256099942544/6300978111</string>
 </resources>
