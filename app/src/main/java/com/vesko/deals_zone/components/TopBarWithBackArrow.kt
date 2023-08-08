@@ -15,7 +15,7 @@ import androidx.compose.ui.text.style.TextOverflow
 @Composable
 fun TopBar(title: String, onBackClicked: () -> Unit) {
     TopAppBar(
-        title = { Text(text = title, overflow = TextOverflow.Ellipsis) },
+        title = { Text(text = title,maxLines = 2, overflow = TextOverflow.Ellipsis) },
         navigationIcon = {
             IconButton(onClick = onBackClicked) {
                 Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "back icon")

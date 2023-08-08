@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.vesko.deals_zone.R
 import com.vesko.deals_zone.model.Deal
+import com.vesko.deals_zone.utils.getPercentage
 import kotlinx.coroutines.launch
 
 @Composable
@@ -53,7 +54,7 @@ fun DealItem(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(120.dp.takeIf { !searchViewItemList } ?: 100.dp)
+            .height(120.dp)
             .clickable {
                 bottomBarVisible(false)
                 navigateOnCardClick(deal.id)
@@ -103,29 +104,43 @@ fun DealItem(
                         lineHeight = 18.sp
                     )
                 }
-                Row(
-                    modifier = Modifier
-                        .padding(bottom = 0.dp)
-                        .fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween
+                Row(modifier = Modifier
+                    .padding(bottom = 0.dp)
+                    .fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween
                 ) {
+                    Column(modifier = Modifier
+                        .padding(4.dp)
+                        .fillMaxHeight(), verticalArrangement = Arrangement.Center
+                    ) {
+                        PercentageView(
+                            percentagePrice = getPercentage(
+                                price = deal.price,
+                                realPrice = deal.realPrice
+                            ),
+                        )
+                    }
                     Column(
                         modifier = Modifier
                             .fillMaxHeight()
                             .padding(4.dp), verticalArrangement = Arrangement.Center
                     ) {
-                        Text(
-                            text = "$" + deal.price,
-                            color = colorResource(id = R.color.red),
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 16.sp
-                        )
-                        if (!searchViewItemList)
+                        Row {
                             Text(
-                                text = "$" + deal.realPrice,
+                                text = "$${deal.price}",
+                                fontSize = 16.sp,
                                 fontWeight = FontWeight.Bold,
+                                color = colorResource(id = R.color.red),
+                            )
+                        }
+
+                        if (!searchViewItemList) {
+                            Text(
+                                text = "$${deal.realPrice}",
+                                color = colorResource(id = R.color.grey),
                                 fontSize = 12.sp,
                                 style = TextStyle(textDecoration = TextDecoration.LineThrough)
                             )
+                        }
                     }
                     if (!searchViewItemList) {
                         Column(
@@ -154,7 +169,7 @@ fun DealItem(
                                 .fillMaxHeight()
                                 .padding(2.dp), verticalArrangement = Arrangement.Bottom
                         ) {
-                            OutlinedBuyButton(context = context, link = deal.link)
+                            BuyButton(context = context, link = deal.link)
                         }
                     }
                 }

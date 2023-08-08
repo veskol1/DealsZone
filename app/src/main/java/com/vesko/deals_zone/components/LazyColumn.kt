@@ -7,12 +7,11 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.vesko.deals_zone.BuildConfig
-import com.vesko.deals_zone.R
 import com.vesko.deals_zone.model.Deal
 
+private const val ADD_POSITION = 6
 @Composable
 fun LazyColumnList(
     dealList: ArrayList<Deal>,
@@ -33,8 +32,8 @@ fun LazyColumnList(
         )
     ) {
         if (showAds) {
-            itemsIndexed(dealList) { index, deal ->
-                if (index.mod(3 ) == 0 && index != 0) {
+            itemsIndexed(dealList.take(30)) { index, deal ->
+                if (index.mod(ADD_POSITION ) == 0 && index != 0) {
                     AdBanner(unitId = BuildConfig.BANNER_LIST)
                 } else {
                     DealItem(
@@ -53,7 +52,7 @@ fun LazyColumnList(
                 }
             }
         } else {
-            items(dealList.take(20)) { deal ->
+            items(dealList.take(30)) { deal ->
                 DealItem(
                     deal = deal,
                     favoriteDeal = dealFavoriteList.contains(deal),
