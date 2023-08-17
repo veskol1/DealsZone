@@ -15,7 +15,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -33,7 +32,6 @@ fun FavoritesScreen(
     snackbarHostState: SnackbarHostState
 ) {
     val dealUiState by dealsViewModel.uiState.collectAsState()
-    val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -56,7 +54,7 @@ fun FavoritesScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "No saved deals yet",
+                    text = "No deals saved yet",
                     fontFamily = FontFamily.Monospace,
                     fontWeight = FontWeight.Bold,
                     fontSize = 24.sp,
@@ -76,7 +74,7 @@ fun FavoritesScreen(
                 onClickFavoriteItem = {dealId ->
                     dealsViewModel.updateFavoriteDealsState(dealId = dealId)
                     scope.launch {
-                        dealsViewModel.saveToDataStore(context, id = dealId)
+                        dealsViewModel.saveToDataStore(id = dealId)
                     }
                 }
             )

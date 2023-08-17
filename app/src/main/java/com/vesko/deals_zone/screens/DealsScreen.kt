@@ -11,7 +11,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.vesko.deals_zone.components.LazyColumnList
@@ -28,7 +27,6 @@ fun DealsScreen(
     snackbarHostState: SnackbarHostState
 ) {
     val dealUiState by dealsViewModel.uiState.collectAsState()
-    val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -51,10 +49,10 @@ fun DealsScreen(
                     onClickFavoriteItem = {dealId ->
                         dealsViewModel.updateFavoriteDealsState(dealId = dealId)
                         scope.launch {
-                            dealsViewModel.saveToDataStore(context, id = dealId)
+                            dealsViewModel.saveToDataStore(id = dealId)
                         }
                     },
-                    showAds = true
+                    showAds = false
                 )
             }
         }

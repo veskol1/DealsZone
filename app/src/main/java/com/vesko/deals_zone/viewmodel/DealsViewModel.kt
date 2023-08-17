@@ -1,17 +1,14 @@
 package com.vesko.deals_zone.viewmodel
 
-import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringSetPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vesko.deals_zone.model.Deal
 import com.vesko.deals_zone.repository.DealsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -23,7 +20,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DealsViewModel @Inject constructor(
-    @ApplicationContext context: Context,
     private val dataStore: DataStore<Preferences>,
     private val repo: DealsRepository
 ) : ViewModel() {
@@ -59,15 +55,15 @@ class DealsViewModel @Inject constructor(
                 _uiState.update { state ->
                     state.copy(
                         status = Status.DONE,
-                        list = data,
+                        list = data.shuffled() as ArrayList<Deal>,
                         filteredList = arrayListOf(),
-                        favoriteSavedDeals = getFavoriteDealsFromDataStore(dealsList = data, context = context)
+                        favoriteSavedDeals = getFavoriteDealsFromDataStore(dealsList = data)
                     )
                 }
             }
         }
     }
-    suspend fun saveToDataStore(context: Context, id: String) {
+    suspend fun saveToDataStore(id: String) {
         val dealsPreferences: Preferences = dataStore.data.first()
         val stringDealsSet = dealsPreferences[DEALS]
 
@@ -115,7 +111,7 @@ class DealsViewModel @Inject constructor(
             }
         }
     }
-    private suspend fun getFavoriteDealsFromDataStore(dealsList: ArrayList<Deal>, context: Context): ArrayList<Deal> {
+    private suspend fun getFavoriteDealsFromDataStore(dealsList: ArrayList<Deal>): ArrayList<Deal> {
         val dealsPreferences: Preferences = dataStore.data.first()
         val stringDealsSet = dealsPreferences[DEALS]
         val favoriteDealList = arrayListOf<Deal>()

@@ -2,8 +2,6 @@ package com.vesko.deals_zone.navigation
 
 import androidx.annotation.DrawableRes
 import com.vesko.deals_zone.R
-
-
 sealed class BottomBarScreen(
     val route: String,
     val name: String,

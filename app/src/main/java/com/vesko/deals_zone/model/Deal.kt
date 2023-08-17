@@ -8,5 +8,6 @@ data class Deal(
     val category: String,
     val link: String,
     val description: String,
-    val imageDeal: String
+    val imageDeal: String,
+    var imageDealSmall: String? = null
 )
