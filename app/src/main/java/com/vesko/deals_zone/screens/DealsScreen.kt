@@ -52,7 +52,7 @@ fun DealsScreen(
                             dealsViewModel.saveToDataStore(id = dealId)
                         }
                     },
-                    showAds = true
+                    showAds = false
                 )
             }
         }

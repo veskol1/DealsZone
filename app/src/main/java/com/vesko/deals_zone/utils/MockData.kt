@@ -10,14 +10,13 @@ val dealsList = arrayListOf(
         realPrice = "21.99",
         category = "home",
         link = "https://www.amazon.com/Utopia-Bedding-Throw-Pillows-Insert/dp/B01NBNDC1T/",
-        description = "• Our most powerful streaming stick - 40% more powerful than Fire TV Stick 4K, with faster app starts and more fluid navigation.\n" +
-                "• Support for next-gen Wi-Fi 6 - Enjoy smoother 4K streaming across multiple Wi-Fi 6 devices.\n" +
-                "• Cinematic experience - Watch in vibrant 4K Ultra HD with support for Dolby Vision, HDR, HDR10+ and immersive Dolby Atmos audio.\n" +
-                "• Endless entertainment - Stream more than 1 million movies and TV episodes. Watch favorites from Netflix, Prime Video, Disney+, Peacock, and more, plus listen to millions of songs. Subscription fees may apply.\n" +
-                "• Live and free TV - Watch live TV, news, and sports with subscriptions to SLING TV, YouTube TV, and others. Stream for free with Freevee, Pluto TV, Tubi, and more.\n" +
-                "• Alexa Voice Remote - Search and launch content with your voice. Get to favorite apps quickly with preset buttons. Control power and volume with one remote.\n" +
-                "• Do more with your smart home - View the front door camera without stopping your show using Live View Picture-in-Picture. Ask Alexa to check the weather or dim the lights.\n" +
-                "• Game on - Fluid gameplay and fast-rendering graphics with a 750Mhz GPU. Access popular games with a Luna cloud gaming subscription.",
-        imageDeal = "https://m.media-amazon.com/images/I/81e1NQRItZL._AC_SL1500_.jpg"
+        description = "• Slim Lightweight and Long Lasting - Set of 4 slim, reusable and versatile hard gel ice packs. Each ice pack measures 7 x 4.7 x 0.5 inches. Keep your insulated cooler bag freezer-cold for longer!\n" +
+                "• Reusable Cold Packs For Cooler - These freezer pack are easily reusable ideal for lunch bag trips, and can be used daily. Fill one time and put in the freezer the night before each use for long lasting, effortless travels with our premium lunch ice packs.\n" +
+                "• Super Versatile - Perfect chillers for everyday use in lunchboxes, breastmilk bags, bento boxes and coolers. Great for kids to take to school in their totes, adults to the office or for outdoor camping. Keep your to go food containers cold and dry.\n" +
+                "• Safe and Durable - Our Cool Packs are made with 100% BPA-Free Non-Toxic materials. They stay cool as ice for many hours and keep your food fresh and your body fit. These small babies sure pack a punch!\n" +
+                "• Quality Guaranteed -Try the best ice packs available risk-free. You won't regret it. Not fully satisfied? Shoot us an email and we'll fully refund you no questions asked.\n" +
+                "• TSA Disclaimer - Healthy Packers Long lasting Cool packs can be brought through TSA security checkpoints when fully frozen or otherwise stored in checked baggage\n" +
+                "• Multi-Functional Ice Packs - Our multifunctional kids ice packs for lunch box are perfectly freezer packs for families to keep food fresh and drinks fresh without ice melting. Ideal for children ice pack for lunch box or bento boxes, take to the office, picnic, hiking, fishing, etc.",
+        imageDeal = "https://m.media-amazon.com/images/I/81dN52hESNL._SL1500_.jpg"
     ),
 )

@@ -10,12 +10,20 @@ class DealsRepository @Inject constructor(private val api: ApiService) {
         return try {
             val response = api.getDeals()
             if (response.isSuccessful && response.body() != null) {
-                response.body()
+                parseList(response.body()!!)
             } else {
                 null
             }
         } catch (e: Exception) {
             null
         }
+    }
+
+    private fun parseList(responseList: ArrayList<Deal>): ArrayList<Deal> {
+        responseList.forEach {
+            it.imageDealSmall = it.imageDeal.replace("_SL1", "_SL0")  //reduces the image quality
+        }
+
+        return responseList
     }
 }

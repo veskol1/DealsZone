@@ -1,21 +1,13 @@
 package com.vesko.deals_zone.screens
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.EnterExitState
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.scaleOut
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,18 +15,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -69,17 +58,14 @@ import com.vesko.deals_zone.utils.getPercentage
 fun DealScreen(deal: Deal, onBackClicked: () -> Unit) {
     val context = LocalContext.current
     var expanded by remember { mutableStateOf(false) }
-
     Scaffold(
-        topBar = { TopBar(title = deal.title, onBackClicked = onBackClicked) }
-    ) {
-        BackHandler { // handle back pressed
-            onBackClicked()
-        }
+        topBar = { TopBar(title = deal.title, onBackClicked = onBackClicked) },
+        content = {
 
-        Surface(modifier = Modifier
-                .fillMaxSize()
-        ) {
+            BackHandler { // handle back pressed
+                onBackClicked()
+            }
+
             Column(modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
@@ -172,8 +158,7 @@ fun DealScreen(deal: Deal, onBackClicked: () -> Unit) {
 
             }
         }
-
-    }
+    )
 }
 
 @Composable

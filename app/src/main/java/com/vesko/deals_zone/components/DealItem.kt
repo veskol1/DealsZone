@@ -84,7 +84,7 @@ fun DealItem(
                         .padding(10.dp), horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically
                 ) {
                     AsyncImage(
-                        model = deal.imageDeal,
+                        model = deal.imageDealSmall,
                         contentDescription = null,
                     )
                 }

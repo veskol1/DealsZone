@@ -1,5 +1,6 @@
 package com.vesko.deals_zone.components
 
+import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -53,6 +54,7 @@ fun LazyColumnList(
             }
         } else {
             items(dealList.take(30)) { deal ->
+                Log.d("haha","deal image "+deal.imageDealSmall)
                 DealItem(
                     deal = deal,
                     favoriteDeal = dealFavoriteList.contains(deal),
