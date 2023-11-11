@@ -15,13 +15,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,11 +38,11 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -53,10 +54,10 @@ import com.vesko.deals_zone.components.PercentageView
 import com.vesko.deals_zone.components.TopBar
 import com.vesko.deals_zone.model.Deal
 import com.vesko.deals_zone.utils.getPercentage
+import com.vesko.deals_zone.utils.mockDealsList
 
 @Composable
 fun DealScreen(deal: Deal, onBackClicked: () -> Unit) {
-    val context = LocalContext.current
     var expanded by remember { mutableStateOf(false) }
     Scaffold(
         topBar = { TopBar(title = deal.title, onBackClicked = onBackClicked) },
@@ -88,7 +89,7 @@ fun DealScreen(deal: Deal, onBackClicked: () -> Unit) {
                         .wrapContentHeight()
                         .animateContentSize(
                             animationSpec = tween(
-                                durationMillis = 300,
+                                durationMillis = 500,
                                 easing = LinearOutSlowInEasing
                             )
                         )
@@ -108,19 +109,54 @@ fun DealScreen(deal: Deal, onBackClicked: () -> Unit) {
                                         val colors = listOf(Color.Black, Color.Transparent)
                                         drawContent()
                                         drawRect(
-                                            brush = Brush.verticalGradient(colors),
+                                            brush = Brush.verticalGradient(
+                                                colors = colors,
+                                                startY = 350f
+                                            ),
                                             blendMode = BlendMode.DstIn
                                         )
                                     }
                             }
                         )
                     ) {
-                        Text(text = deal.description)
+                        Column(modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentHeight()) {
+                            var foundDot = false
+                            var lineToDraw = ""
+                            deal.description.forEach { char ->
+                                if (char == '•') {
+                                    foundDot = true
+                                } else if (char != '\n') {
+                                    lineToDraw += char
+                                } else if (foundDot){
+                                    Row(modifier = Modifier
+                                        .fillMaxWidth()
+                                        .wrapContentHeight()
+                                    ) {
+                                        Column(modifier = Modifier
+                                            .width(10.dp)
+                                            .wrapContentHeight()) {
+                                            Text(text = "•")
+                                        }
+                                        Column(modifier = Modifier
+                                            .fillMaxWidth()
+                                            .wrapContentHeight()) {
+                                            Text(lineToDraw)
+                                            lineToDraw = ""
+                                        }
+                                    }
+                                    Spacer(modifier = Modifier.height(8.dp))
+                                    foundDot = false
+                                    lineToDraw = ""
+                                }
+                            }
+                        }
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                     Row(horizontalArrangement = Arrangement.SpaceBetween) {
                         Column(modifier = Modifier.weight(1f)) {
-                            Row() {
+                            Row {
                                 Text(
                                     text = "Price: ",
                                     fontWeight = FontWeight.Bold,
@@ -147,7 +183,7 @@ fun DealScreen(deal: Deal, onBackClicked: () -> Unit) {
                             modifier = Modifier.weight(1f),
                             horizontalAlignment = Alignment.End
                         ) {
-                            OutlinedBuyButton(context = context, link = deal.link)
+                            OutlinedBuyButton(link = deal.link)
                         }
                     }
                 }
@@ -184,4 +220,11 @@ fun TopImageView(deal: Deal) {
         fontSize = 20.sp)
 
     }
+}
+
+@Composable
+@Preview (showSystemUi = true)
+fun DealScreenPreview() {
+    DealScreen(deal = mockDealsList[0], onBackClicked = {})
+    //just remove AdBanner(unitId = BuildConfig.BANNER_ITEM) to see the preview
 }

@@ -2,6 +2,8 @@ package com.vesko.deals_zone.navigation
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -20,17 +22,20 @@ fun BottomNavGraph(
     snackbarHostState: SnackbarHostState,
     bottomBarVisible: (Boolean) -> Unit
 ) {
+    val dealUiState by dealsViewModel.uiState.collectAsState()
+
     NavHost(
         navController,
         startDestination = BottomBarScreen.Deals.route
     ) {
         composable(route = BottomBarScreen.Deals.route) {
             DealsScreen(
+                dealsViewModel = dealsViewModel,
+                dealUiState = dealUiState,
                 navigateOnCardClick = { dealId ->
                     navController.navigate("deal/$dealId/true")
                 },
                 bottomBarVisible = bottomBarVisible,
-                dealsViewModel = dealsViewModel,
                 snackbarHostState = snackbarHostState
             )
         }

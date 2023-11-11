@@ -1,6 +1,5 @@
 package com.vesko.deals_zone.components
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.layout.Spacer
@@ -13,9 +12,13 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
+import com.vesko.deals_zone.utils.mockDealsList
 
 @Composable
-fun OutlinedBuyButton(context: Context, link: String) {
+fun OutlinedBuyButton(link: String) {
+    val context = LocalContext.current
     OutlinedButton(onClick = {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
         context.startActivity(intent)
@@ -28,4 +31,10 @@ fun OutlinedBuyButton(context: Context, link: String) {
         Spacer(Modifier.size(ButtonDefaults.IconSpacing))
         Text(text = "Buy")
     }
+}
+
+@Preview
+@Composable
+fun OutlinedBuyButtonPreview() {
+    OutlinedBuyButton(mockDealsList[0].link)
 }

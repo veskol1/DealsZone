@@ -19,21 +19,22 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.vesko.deals_zone.utils.mockDealUiState
+import com.vesko.deals_zone.utils.mockDealsList
 import com.vesko.deals_zone.viewmodel.DealsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchViewBar(dealsViewModel: DealsViewModel, navigateOnCardClick: (String) -> Unit) {
-    val dealUiState by dealsViewModel.uiState.collectAsState()
+fun SearchViewBar(dealUiState: DealsViewModel.UiState, onSearchDeal: (String) -> Unit, navigateOnCardClick: (String) -> Unit) {
     var active by remember { mutableStateOf(false) }
     var searchTapped by remember { mutableStateOf(false) }
 
@@ -52,7 +53,7 @@ fun SearchViewBar(dealsViewModel: DealsViewModel, navigateOnCardClick: (String) 
         query = dealUiState.searchBarText,
         onQueryChange = {
             searchTapped = false
-            dealsViewModel.onSearchDeal(it)
+            onSearchDeal(it)
         },
         onSearch = { searchTapped = true },
         active = active,
@@ -66,7 +67,7 @@ fun SearchViewBar(dealsViewModel: DealsViewModel, navigateOnCardClick: (String) 
                     Modifier.clickable {
                         active = false
                         searchTapped = false
-                        dealsViewModel.onSearchDeal("")
+                        onSearchDeal("")
                     }
                 )
             } else {
@@ -85,7 +86,7 @@ fun SearchViewBar(dealsViewModel: DealsViewModel, navigateOnCardClick: (String) 
                             searchTapped = false
                         } else {
                             searchTapped = false
-                            dealsViewModel.onSearchDeal("")
+                            onSearchDeal("")
                         }
                     },
                     imageVector = Icons.Default.Close,
@@ -97,7 +98,7 @@ fun SearchViewBar(dealsViewModel: DealsViewModel, navigateOnCardClick: (String) 
         BackHandler { // handle back pressed
             active = false
             searchTapped = false
-            dealsViewModel.onSearchDeal("")
+            onSearchDeal("")
         }
         LazyColumn(
             modifier = Modifier
@@ -118,7 +119,7 @@ fun SearchViewBar(dealsViewModel: DealsViewModel, navigateOnCardClick: (String) 
                         snackbarHostState = null,
                         bottomBarVisible = {},
                         navigateOnCardClick = {dealId ->
-                            dealsViewModel.onSearchDeal("")
+                            onSearchDeal("")
                             navigateOnCardClick(dealId)
                         },
                         onClickFavoriteItem = {},
@@ -128,7 +129,7 @@ fun SearchViewBar(dealsViewModel: DealsViewModel, navigateOnCardClick: (String) 
                     Row(modifier = Modifier
                         .padding(16.dp)
                         .clickable {
-                            dealsViewModel.onSearchDeal("")
+                            onSearchDeal("")
                             navigateOnCardClick(deal.id)
                         }) {
                         Text(text = deal.title, overflow = TextOverflow.Ellipsis, maxLines = 1)
@@ -138,4 +139,15 @@ fun SearchViewBar(dealsViewModel: DealsViewModel, navigateOnCardClick: (String) 
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun SearchBarPreview() {
+
+    SearchViewBar(
+        dealUiState = mockDealUiState,
+        onSearchDeal = {},
+        navigateOnCardClick = {}
+    )
 }
