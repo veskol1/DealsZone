@@ -37,7 +37,7 @@ fun ErrorScreen() {
 
 
 @Composable
-@Preview (backgroundColor = 0xFFFFFFFF, showBackground = true)
+@Preview (backgroundColor = 0xFFFFFFFF, showBackground = true, showSystemUi = true)
 fun previewErrorScreen () {
     ErrorScreen()
 }

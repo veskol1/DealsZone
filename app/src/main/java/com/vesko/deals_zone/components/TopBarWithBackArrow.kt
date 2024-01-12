@@ -9,6 +9,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import com.vesko.deals_zone.utils.mockDealsList
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -22,4 +24,10 @@ fun TopBar(title: String, onBackClicked: () -> Unit) {
             }
         }
     )
+}
+
+@Composable
+@Preview
+fun TopBarPreview() {
+    TopBar(title = mockDealsList[0].title, onBackClicked = {})
 }

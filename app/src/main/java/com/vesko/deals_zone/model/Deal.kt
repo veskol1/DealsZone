@@ -9,5 +9,6 @@ data class Deal(
     val link: String,
     val description: String,
     val imageDeal: String,
-    var imageDealSmall: String? = null
+    var hasCoupon: Boolean = false,
+    var imageDealSmall: String? = null,
 )

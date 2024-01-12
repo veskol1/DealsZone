@@ -1,8 +1,11 @@
 package com.vesko.deals_zone.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -10,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -24,19 +28,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.vesko.deals_zone.R
 import com.vesko.deals_zone.model.Deal
 import com.vesko.deals_zone.utils.getPercentage
+import com.vesko.deals_zone.utils.mockDealsList
 import kotlinx.coroutines.launch
 
 @Composable
@@ -78,15 +87,28 @@ fun DealItem(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(10.dp), horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically
-                ) {
-                    AsyncImage(
-                        model = deal.imageDealSmall,
-                        contentDescription = null,
-                    )
+                BoxWithConstraints  {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clipToBounds(),contentAlignment = Alignment.TopEnd
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(10.dp), horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            AsyncImage(
+                                model = deal.imageDealSmall,
+                                contentDescription = null,
+                            )
+                        }
+                        if (deal.hasCoupon) {
+                            Box(modifier = Modifier.size(60.dp)) {
+                                Image(painter = painterResource(id = R.drawable.coupon), contentDescription = null)
+                            }
+                        }
+                    }
                 }
             }
             Column(
@@ -176,4 +198,17 @@ fun DealItem(
             }
         }
     }
+}
+
+@Composable
+@Preview(backgroundColor = 0xFFFFFFFF, showBackground = true)
+fun DealItemPreview() {
+    DealItem(
+        deal = mockDealsList[0],
+        favoriteDeal = false ,
+        navigateOnCardClick = {},
+        bottomBarVisible = {},
+        snackbarHostState = null,
+        onClickFavoriteItem = {},
+    )
 }
