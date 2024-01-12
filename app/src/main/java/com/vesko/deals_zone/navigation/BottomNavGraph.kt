@@ -58,9 +58,9 @@ fun BottomNavGraph(
             )
         }
 
-        composable(route = BottomBarScreen.Settings.route)  {
-            SettingsScreen()
-        }
+//        composable(route = BottomBarScreen.Settings.route)  {
+//            SettingsScreen()
+//        }
 
         composable(
             route = "deal/{id}/{showBottomBar}"

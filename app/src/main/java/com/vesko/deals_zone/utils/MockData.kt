@@ -20,7 +20,8 @@ val mockDealsList = arrayListOf(
                 "•Occasions: Whether you are daily wear, lounging, home, work, club, party, dating, vacation and Christmas holiday etc, this cute sweater tops will be your perfect companion. trendy and fashionable look.\n" +
                 "•Must-have Collection: This slightly oversized sweater is so soft and casual! It will pair gorgeously with blue jeans or rich colored fall skinnies! And because of the neckline, you can show off your necklace.Unique outside seam design brings stylish looks.\n" +
                 "•Garment Care: Gentle machine wash or hand wash in cold, do not bleach, flat dry.",
-        imageDeal = "https://m.media-amazon.com/images/I/81dN52hESNL._SL1500_.jpg"
+        imageDeal = "https://m.media-amazon.com/images/I/81dN52hESNL._SL1500_.jpg",
+        hasCoupon = false
     ),
     Deal(
         id = "2",

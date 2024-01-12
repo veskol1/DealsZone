@@ -1,5 +1,6 @@
 package com.vesko.deals_zone.screens
 
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.animateContentSize
@@ -189,7 +190,7 @@ fun DealScreen(deal: Deal, onBackClicked: () -> Unit) {
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 Row {
-                    AdBanner(unitId = BuildConfig.BANNER_ITEM)
+                   // AdBanner(unitId = BuildConfig.BANNER_ITEM)
                 }
 
             }
@@ -200,9 +201,17 @@ fun DealScreen(deal: Deal, onBackClicked: () -> Unit) {
 @Composable
 fun TopImageView(deal: Deal) {
     val transition = rememberInfiniteTransition()
-    val color by transition.animateColor(initialValue = Color.Red, targetValue = colorResource(id = R.color.red), animationSpec = infiniteRepeatable(animation = tween(2000), repeatMode = RepeatMode.Reverse))
-    Box(modifier = Modifier
-        .height(300.dp)) {
+    val color by transition.animateColor(
+        initialValue = colorResource(id = R.color.red_00_10),
+        targetValue = colorResource(id = R.color.red_60_100),
+        animationSpec = infiniteRepeatable(animation = tween(2000), repeatMode = RepeatMode.Reverse),
+        label = ""
+    )
+
+    Box(
+        modifier = Modifier
+            .height(300.dp)
+    ) {
         AsyncImage(
             modifier = Modifier
                 .fillMaxSize()

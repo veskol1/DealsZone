@@ -52,7 +52,7 @@ fun MainScreen(dealsViewModel: DealsViewModel = viewModel()) {
 
 @Composable
 fun BottomNavigation (navController: NavController) {
-    val screens = listOf(BottomBarScreen.Deals, BottomBarScreen.Category, BottomBarScreen.Favorites, BottomBarScreen.Settings)
+    val screens = listOf(BottomBarScreen.Deals, BottomBarScreen.Category, BottomBarScreen.Favorites)
     NavigationBar {
         screens.forEach { screen ->
             Item(item = screen, navController = navController)

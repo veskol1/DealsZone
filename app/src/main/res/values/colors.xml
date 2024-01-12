@@ -7,7 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="red">#EF5350</color>
+    <color name="red">#F44336</color>  //0-10
+    <color name="red_00_10">#F2EF5350</color>  //0-10
+    <color name="red_10_25">#E6F44336</color>  //10-25
+    <color name="red_25_40">#F44336</color>  //25-40
+    <color name="red_40_60">#E6E53935</color>  //40-60
+    <color name="red_60_100">#E53935</color>  //60-100
+
     <color name="grey">#878787</color>
 
 </resources>
