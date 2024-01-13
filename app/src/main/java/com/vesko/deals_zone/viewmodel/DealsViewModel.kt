@@ -28,6 +28,7 @@ class DealsViewModel @Inject constructor(
 
     private val _uiState = MutableStateFlow(
         UiState(
+            numItemsToShow = 10,
             status = Status.LOADING,
             list = arrayListOf(),
             filteredList = arrayListOf(),
@@ -160,6 +161,14 @@ class DealsViewModel @Inject constructor(
         }
     }
 
+    fun loadMoreItems() = _uiState.update { state ->
+        val nextIndex = uiState.value.numItemsToShow + 10
+        val lastIndex = uiState.value.list.size
+        state.copy(
+            numItemsToShow = nextIndex.takeIf { nextIndex < lastIndex } ?: lastIndex
+        )
+    }
+
     data class UiState(
         val status: Status,
         val list: ArrayList<Deal>,
@@ -167,6 +176,7 @@ class DealsViewModel @Inject constructor(
         val searchBarText: String,
         val favoriteSavedDeals: ArrayList<Deal>,
         val dealsByCategory: ArrayList<Deal>,
+        var numItemsToShow: Int,
     )
 
 

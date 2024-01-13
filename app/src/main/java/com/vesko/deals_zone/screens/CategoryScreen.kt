@@ -60,6 +60,7 @@ fun CategoryScreen(
                 )
             } else {
                 LazyColumnList(
+                    itemsToShow = dealUiState.dealsByCategory.size ,
                     dealList = dealUiState.dealsByCategory,
                     dealFavoriteList = dealUiState.favoriteSavedDeals,
                     navigateOnCardClick = { dealId ->

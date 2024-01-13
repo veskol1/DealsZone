@@ -45,6 +45,7 @@ fun DealsScreen(
             DealsViewModel.Status.ERROR -> ErrorScreen()
             else -> {
                 LazyColumnList(
+                    itemsToShow = dealUiState.numItemsToShow,
                     dealList = dealUiState.list,
                     dealFavoriteList = dealUiState.favoriteSavedDeals,
                     navigateOnCardClick = { dealId ->
@@ -57,6 +58,9 @@ fun DealsScreen(
                         scope.launch {
                             dealsViewModel?.saveToDataStore(id = dealId)
                         }
+                    },
+                    loadMoreItems = {
+                        dealsViewModel?.loadMoreItems()
                     },
                     showAds = false
                 )
