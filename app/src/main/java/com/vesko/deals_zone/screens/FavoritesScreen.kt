@@ -64,6 +64,7 @@ fun FavoritesScreen(
 
         } else {
             LazyColumnList(
+                itemsToShow = dealUiState.favoriteSavedDeals.size,
                 dealList = dealUiState.favoriteSavedDeals,
                 dealFavoriteList = dealUiState.favoriteSavedDeals,
                 navigateOnCardClick = { dealId ->

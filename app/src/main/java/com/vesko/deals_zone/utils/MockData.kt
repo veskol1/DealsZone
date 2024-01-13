@@ -59,6 +59,7 @@ val mockDealsList = arrayListOf(
 
 
 val mockDealUiState = DealsViewModel.UiState(
+    numItemsToShow = 3,
     status = DealsViewModel.Status.DONE,
     list = mockDealsList,
     filteredList = arrayListOf(),

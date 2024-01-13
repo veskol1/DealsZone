@@ -16,7 +16,7 @@ fun LoadingScreen() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        CircularProgressIndicator(color = colorScheme.primary)
+        CircularProgressIndicator()
     }
 }
 
