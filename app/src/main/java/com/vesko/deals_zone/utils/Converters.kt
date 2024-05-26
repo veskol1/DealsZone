@@ -12,7 +12,10 @@ fun Dp.dpToPx() = with(LocalDensity.current) { this@dpToPx.toPx() }
 @Composable
 fun Int.pxToDp() = with(LocalDensity.current) { this@pxToDp.toDp() }
 
+fun getPercentage(price: String, realPrice: String): Int {
+    return round(1.minus(price.toFloat().div(realPrice.toFloat())) * 100).toInt()
+}
 
-fun getPercentage(price: String, realPrice: String): String {
+fun getStringPercentage(price: String, realPrice: String): String {
     return "-${round(1.minus(price.toFloat().div(realPrice.toFloat())) * 100).toInt()}%"
 }

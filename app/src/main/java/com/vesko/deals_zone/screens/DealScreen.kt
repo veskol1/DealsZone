@@ -1,6 +1,5 @@
 package com.vesko.deals_zone.screens
 
-import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.animateContentSize
@@ -25,7 +24,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -58,7 +57,7 @@ import com.vesko.deals_zone.components.OutlinedBuyButton
 import com.vesko.deals_zone.components.PercentageView
 import com.vesko.deals_zone.components.TopBar
 import com.vesko.deals_zone.model.Deal
-import com.vesko.deals_zone.utils.getPercentage
+import com.vesko.deals_zone.utils.getStringPercentage
 import com.vesko.deals_zone.utils.mockDealsList
 
 @Composable
@@ -79,16 +78,23 @@ fun DealScreen(deal: Deal, onBackClicked: () -> Unit) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 TopImageView(deal)
-                Divider(modifier = Modifier.padding(top = 8.dp))
+                HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
                 Column(modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = 16.dp)
                 ) {
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.height(6.dp))
+                    Text(
+                        text = deal.title,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
                     Text(
                         text = "About this item:",
                         fontWeight = FontWeight.Bold,
-                        fontSize = 20.sp
+                        fontSize = 16.sp
                     )
                     Row(modifier = Modifier
                         .wrapContentHeight()
@@ -151,7 +157,7 @@ fun DealScreen(deal: Deal, onBackClicked: () -> Unit) {
                                             lineToDraw = ""
                                         }
                                     }
-                                    Spacer(modifier = Modifier.height(8.dp))
+                                    Spacer(modifier = Modifier.height(6.dp))
                                     foundDot = false
                                     lineToDraw = ""
                                 }
@@ -194,7 +200,7 @@ fun DealScreen(deal: Deal, onBackClicked: () -> Unit) {
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 Row {
-                    AdBanner(unitId = BuildConfig.BANNER_ITEM)
+                    //AdBanner(unitId = BuildConfig.BANNER_ITEM)
                 }
 
             }
@@ -220,13 +226,13 @@ fun TopImageView(deal: Deal) {
         AsyncImage(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 10.dp),
+                .padding(horizontal = 10.dp, vertical = 6.dp),
             model = deal.imageDeal,
             contentDescription = null,
         )
         PercentageView(
             color = color,
-            percentagePrice = getPercentage(
+            percentagePrice = getStringPercentage(
                 price = deal.price,
                 realPrice = deal.realPrice
             ),
@@ -234,7 +240,10 @@ fun TopImageView(deal: Deal) {
             fontSize = 20.sp
         )
         if (deal.hasCoupon) {
-            Box(modifier = Modifier.size(90.dp).align(Alignment.TopEnd).padding(horizontal = 10.dp)) {
+            Box(modifier = Modifier
+                .size(90.dp)
+                .align(Alignment.TopEnd)
+                .padding(horizontal = 10.dp)) {
                 Image(painter = painterResource(id = R.drawable.coupon), contentDescription = null)
             }
         }

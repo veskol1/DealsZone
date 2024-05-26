@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -33,7 +32,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
@@ -45,6 +43,7 @@ import coil.compose.AsyncImage
 import com.vesko.deals_zone.R
 import com.vesko.deals_zone.model.Deal
 import com.vesko.deals_zone.utils.getPercentage
+import com.vesko.deals_zone.utils.getStringPercentage
 import com.vesko.deals_zone.utils.mockDealsList
 import kotlinx.coroutines.launch
 
@@ -87,26 +86,24 @@ fun DealItem(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                BoxWithConstraints  {
-                    Box(
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clipToBounds(),contentAlignment = Alignment.TopEnd
+                ) {
+                    Row(
                         modifier = Modifier
                             .fillMaxSize()
-                            .clipToBounds(),contentAlignment = Alignment.TopEnd
+                            .padding(10.dp), horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(10.dp), horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            AsyncImage(
-                                model = deal.imageDealSmall,
-                                contentDescription = null,
-                            )
-                        }
-                        if (deal.hasCoupon) {
-                            Box(modifier = Modifier.size(60.dp)) {
-                                Image(painter = painterResource(id = R.drawable.coupon), contentDescription = null)
-                            }
+                        AsyncImage(
+                            model = deal.imageDealSmall,
+                            contentDescription = null,
+                        )
+                    }
+                    if (deal.hasCoupon) {
+                        Box(modifier = Modifier.size(60.dp)) {
+                            Image(painter = painterResource(id = R.drawable.coupon), contentDescription = null)
                         }
                     }
                 }
@@ -134,8 +131,21 @@ fun DealItem(
                         .padding(4.dp)
                         .fillMaxHeight(), verticalArrangement = Arrangement.Center
                     ) {
+                        val percentagePrice = getPercentage(price = deal.price, realPrice = deal.realPrice)
+                        val percentageColor = when (percentagePrice) {
+                            in 0..25 -> {
+                                colorResource(id = R.color.red_light)
+                            }
+                            in 26..40 -> {
+                                colorResource(id = R.color.red_normal)
+                            }
+                            else -> {
+                                colorResource(id = R.color.red_strong)
+                            }
+                        }
                         PercentageView(
-                            percentagePrice = getPercentage(
+                            color = percentageColor,
+                            percentagePrice = getStringPercentage(
                                 price = deal.price,
                                 realPrice = deal.realPrice
                             ),

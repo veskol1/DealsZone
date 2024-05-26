@@ -26,8 +26,8 @@ val mockDealsList = arrayListOf(
     Deal(
         id = "2",
         title = "Utopia Bedding Throw Pillows Insert (Pack of 2, White) - 18 x 18 Inches Bed and Couch Pillows - Indoor Decorative Pillows",
-        price = "1.99",
-        realPrice = "21.99",
+        price = "9.99",
+        realPrice = "11.00",
         category = "home",
         link = "https://www.amazon.com/Utopia-Bedding-Throw-Pillows-Insert/dp/B01NBNDC1T/",
         description = "• 50%Viscose, 30%Polyamide, 20%Polyester\n" +
@@ -45,14 +45,14 @@ val mockDealsList = arrayListOf(
         id = "3",
         title = "Utopia Bedding Throw Pillows Insert (Pack of 2, White) - 18 x 18 Inches Bed and Couch Pillows - Indoor Decorative Pillows",
         price = "5.99",
-        realPrice = "1.99",
+        realPrice = "11.99",
         category = "home",
         link = "https://www.amazon.com/Utopia-Bedding-Throw-Pillows-Insert/dp/B01NBNDC1T/",
-        description = "• Fabric Type 59% Recycled Polyamide, 41% Polyamide\n" +
-                "• Care Instructions Hand Wash Only\n" +
-                "• Origin Imported\n" +
-                "• Closure Type Clasp\n" +
-                "• Country of Origin Vietnam",
+        description = "•Travel Essentials for Beach Vacation - It is an extra-large beach bag that holds everything you & your family need. You will love the waterproof material, which will keep you away from many troubles.\n" +
+                "•Large Capacity - The beach bag tote can hold 4-6 large beach towels, extra clothes, shoes, sunblock, water bottles, beach toys, etc. Recommend for a beach vacation, tote bag, travel bag, duffel bag, swim pool bag, nurse bag, weekend bag, cruise must haves.\n" +
+                "•Beach Bags Waterproof Sandproof - After mass market research and thousands of tests, we apply a unique superior waterproof material, which is verified to be more sturdy, lighter, and last 5 years longer than ordinary travel totes.\n" +
+                "•Zipper Closure & Soft Strap - This Lightweight & foldable tote bag is easy to clean and store. It features a top zipper closure & well- designed shoulder strap comfortable to carry & 2 side bottle pockets & 1 inside zipper pocket.\n" +
+                "•Original Stylish Design - Becokan beach bag is designed especially for women in decades, stylish and eye-catching, wide use for different occasions - beach, gym, work, travel, shop, yoga, groceries, vacation, picnic, etc. Get ready to enjoy your time with Becokan beach bags!",
         imageDeal = "https://m.media-amazon.com/images/I/81dN52hESNL._SL1500_.jpg"
     ),
 )
